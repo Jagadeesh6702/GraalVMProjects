@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tours</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="header">
+    <h1>Available Tours</h1>
+    <button id="show-add-form" class="add-btn">Add Tour</button>
+  </div>
+
+  <table id="tour-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="tour-list"></tbody>
+  </table>
+
+  <div id="form-modal" class="modal hidden">
+    <form id="add-tour-form" class="modal-content">
+      <h2 id="form-title">Add a New Tour</h2>
+      <input type="text" id="tour-name" placeholder="Tour Name" required>
+      <input type="text" id="tour-description" placeholder="Description" required>
+      <div class="modal-actions">
+        <button type="submit" id="submit-btn">Save</button>
+        <button type="button" id="cancel-btn">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

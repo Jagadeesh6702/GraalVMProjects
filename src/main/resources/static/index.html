@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tour Guide</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Welcome to Tour Guide</h1>
+  <a href="tours.html">View Tours</a>
+  <span id="welcome"></span>
+  <script>
+    fetch('/api/users/current')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('welcome').textContent = 'Welcome, ' + data.username;
+      });
+  </script>
+</body>
+</html>

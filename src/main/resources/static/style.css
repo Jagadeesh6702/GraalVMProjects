@@ -1,0 +1,233 @@
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(120deg, #f0f4f8 0%, #c9e7fa 100%);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  color: #2a4d69;
+  margin-bottom: 32px;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+a {
+  display: inline-block;
+  padding: 14px 32px;
+  background: #2a4d69;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 500;
+  box-shadow: 0 2px 12px rgba(42, 77, 105, 0.08);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.15s;
+}
+
+a:hover {
+  background: #397ba6;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 24px rgba(42, 77, 105, 0.15);
+}
+
+#tour-list {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0;
+  list-style: none;
+}
+
+#tour-list li {
+  background: #fff;
+  margin-bottom: 20px;
+  padding: 24px 32px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(42, 77, 105, 0.08);
+  font-size: 1.2rem;
+  color: #333;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+#tour-list li:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 6px 24px rgba(42, 77, 105, 0.15);
+  background: #eaf6fb;
+  cursor: pointer;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 40px auto 20px auto;
+  max-width: 800px;
+}
+
+.add-btn {
+  background: #2a4d69;
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.add-btn:hover {
+  background: #397ba6;
+}
+
+#tour-table {
+  width: 80%;
+  margin: 0 auto 40px auto;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(42, 77, 105, 0.08);
+  overflow: hidden;
+}
+
+#tour-table th, #tour-table td {
+  padding: 16px 20px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+#tour-table th {
+  background: #f0f4f8;
+  color: #2a4d69;
+  font-weight: 600;
+}
+
+#tour-table tr:last-child td {
+  border-bottom: none;
+}
+
+.action-btn {
+  margin-right: 8px;
+  padding: 6px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.edit-btn {
+  background: #f7b731;
+  color: #fff;
+}
+
+.delete-btn {
+  background: #eb3b5a;
+  color: #fff;
+}
+
+.edit-btn:hover {
+  background: #f5a623;
+}
+
+.delete-btn:hover {
+  background: #d7263d;
+}
+
+/* Modal styles */
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(42, 77, 105, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 32px 40px;
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(42, 77, 105, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 320px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+#submit-btn {
+  background: #2a4d69;
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#cancel-btn {
+  background: #e0e0e0;
+  color: #333;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#submit-btn:hover {
+  background: #397ba6;
+}
+
+#cancel-btn:hover {
+  background: #bdbdbd;
+}
+
+/* Login page styles */
+#login-form {
+  background: #fff;
+  padding: 32px 40px;
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(42, 77, 105, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 320px;
+}
+
+#login-form input {
+  padding: 12px;
+  border: 1px solid #c9e7fa;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+#login-form button {
+  background: #2a4d69;
+  color: #fff;
+  border: none;
+  padding: 12px 0;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#login-form button:hover {
+  background: #397ba6;
+}
