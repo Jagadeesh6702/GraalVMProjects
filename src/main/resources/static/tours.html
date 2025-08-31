@@ -6,33 +6,45 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="header">
-    <h1>Available Tours</h1>
-    <button id="show-add-form" class="add-btn">Add Tour</button>
-  </div>
+  <header class="header">
+    <h1 style="size: 25px;text-align:center; margin-bottom: 2rem;">Tours</h1>
+    <p style="text-align:center; color: #666; margin-bottom: 2rem;">
+        Browse, create, and manage available tours.
+    </p>
+    <button id="show-add-form" class="btn primary">+ Add Tour</button>
+  </header>
 
-  <table id="tour-table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody id="tour-list"></tbody>
-  </table>
+  <main>
+    <table id="tour-table" class="tour-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tour-list"></tbody>
+    </table>
+  </main>
 
+  <!-- Modal -->
   <div id="form-modal" class="modal hidden">
-    <form id="add-tour-form" class="modal-content">
+    <div class="modal-content">
       <h2 id="form-title">Add a New Tour</h2>
-      <input type="text" id="tour-name" placeholder="Tour Name" required>
-      <input type="text" id="tour-description" placeholder="Description" required>
-      <div class="modal-actions">
-        <button type="submit" id="submit-btn">Save</button>
-        <button type="button" id="cancel-btn">Cancel</button>
-      </div>
-    </form>
+      <form id="add-tour-form">
+        <input type="text" id="tour-name" placeholder="Tour Name" required>
+        <input type="text" id="tour-description" placeholder="Description" required>
+        <div class="modal-actions">
+          <button type="submit" id="submit-btn" class="btn primary">Save</button>
+          <button type="button" id="cancel-btn" class="btn secondary">Cancel</button>
+        </div>
+      </form>
+    </div>
   </div>
+
+  <footer>
+    <p>&copy; 2025 Tour Guide. All Rights Reserved.</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>

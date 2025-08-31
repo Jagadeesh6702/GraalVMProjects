@@ -25,4 +25,16 @@ public class UserService {
     public User findByEmail(String email) {
         return repo.findByEmail(email);
     }
+
+    public User updateUser(Long id, User updatedUser) {
+        User user = repo.findById(id).orElse(null);
+        if (user != null) {
+            user.setUsername(updatedUser.getUsername());
+            user.setEmail(updatedUser.getEmail());
+            user.setPassword(updatedUser.getPassword());
+            // set other fields as needed
+            return repo.save(user);
+        }
+        return null;
+    }
 }
