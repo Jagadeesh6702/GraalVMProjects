@@ -37,7 +37,7 @@ a:hover {
   font-size: 1.8rem;
 }
 
-.add-btn {
+.add-btn, .btn.primary {
   background: #4cafef;
   border: none;
   padding: 10px 16px;
@@ -49,37 +49,64 @@ a:hover {
   transition: background 0.3s;
 }
 
-.add-btn:hover {
+.add-btn:hover, .btn.primary:hover {
   background: #3a9bdc;
 }
 
-/* ========== TABLE ========== */
-table {
-  width: 90%;
-  margin: 30px auto;
-  border-collapse: collapse;
-  background: #fff;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-  border-radius: 10px;
+.btn.secondary {
+  background: #ddd;
+  color: #333;
+}
+
+.btn.secondary:hover {
+  background: #bbb;
+}
+
+/* ========== CARD GRID (Overrides TABLE) ========== */
+.tour-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.tour-card {
+  border: 1px solid #dceaf5;
+  border-radius: 12px;
   overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(42, 77, 105, 0.1);
+  transition: transform 0.2s;
 }
 
-thead {
-  background: #2a4d69;
-  color: #fff;
+.tour-card:hover {
+  transform: translateY(-4px);
 }
 
-th, td {
-  padding: 14px 18px;
-  text-align: left;
+.tour-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
 }
 
-tbody tr:nth-child(even) {
-  background: #f9fcff;
+.tour-card .content {
+  padding: 16px;
 }
 
-tbody tr:hover {
-  background: #e9f3fb;
+.tour-card h3 {
+  margin: 0 0 6px;
+  font-size: 1.2rem;
+  color: #2a4d69;
+}
+
+.tour-card p {
+  margin: 4px 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.actions {
+  margin-top: 10px;
 }
 
 .action-btn {
@@ -148,7 +175,8 @@ tbody tr:hover {
 }
 
 /* Inputs */
-.modal-content input {
+.modal-content input,
+.modal-content select {
   padding: 12px 14px;
   border: 1px solid #c9e7fa;
   border-radius: 8px;
@@ -156,7 +184,8 @@ tbody tr:hover {
   transition: border 0.2s, box-shadow 0.2s;
 }
 
-.modal-content input:focus {
+.modal-content input:focus,
+.modal-content select:focus {
   border-color: #2a4d69;
   box-shadow: 0 0 0 3px rgba(42, 77, 105, 0.2);
   outline: none;
@@ -179,23 +208,6 @@ tbody tr:hover {
   transition: 0.2s;
 }
 
-#submit-btn {
-  background: #4cafef;
-  color: #fff;
-}
-
-#submit-btn:hover {
-  background: #3a9bdc;
-}
-
-#cancel-btn {
-  background: #ddd;
-}
-
-#cancel-btn:hover {
-  background: #bbb;
-}
-
 /* Animation */
 @keyframes slideDown {
   from {
@@ -210,13 +222,13 @@ tbody tr:hover {
 
 /* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
-  table {
-    width: 100%;
-    font-size: 0.9rem;
-  }
   .header {
     flex-direction: column;
     gap: 12px;
     text-align: center;
+  }
+  .tour-grid {
+    grid-template-columns: 1fr;
+    padding: 1rem;
   }
 }

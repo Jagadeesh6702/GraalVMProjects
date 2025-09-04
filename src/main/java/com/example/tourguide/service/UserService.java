@@ -26,6 +26,10 @@ public class UserService {
         return repo.findByEmail(email);
     }
 
+    public User findByUsername(String username) {
+        return repo.findByUsername(username);
+    }
+
     public User updateUser(Long id, User updatedUser) {
         User user = repo.findById(id).orElse(null);
         if (user != null) {

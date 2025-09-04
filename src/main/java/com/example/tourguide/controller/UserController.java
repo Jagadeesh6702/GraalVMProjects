@@ -44,7 +44,14 @@ public class UserController {
     public ResponseEntity<?> getCurrentUser(HttpSession session) {
         String username = (String) session.getAttribute("username");
         if (username != null) {
-            return ResponseEntity.ok(Map.of("username", username));
+            User user = service.findByUsername(username); 
+            if (user != null) {
+                return ResponseEntity.ok(Map.of(
+                    "username", user.getUsername(),
+                    "email", user.getEmail(),
+                    "isAdmin", user.isAdmin()
+                ));
+            }
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
@@ -58,4 +65,5 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
     }
+    
 }

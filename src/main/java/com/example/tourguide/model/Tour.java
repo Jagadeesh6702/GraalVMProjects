@@ -2,6 +2,8 @@ package com.example.tourguide.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Data
@@ -16,4 +18,6 @@ public class Tour {
     private String location;
     private double price;
     private String description;
+    @Column(name = "location_type")
+    private String locationType;
 }

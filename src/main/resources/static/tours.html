@@ -7,24 +7,17 @@
 </head>
 <body>
   <header class="header">
-    <h1 style="size: 25px;text-align:center; margin-bottom: 2rem;">Tours</h1>
+    <h1 style="text-align:center; margin-bottom: 1rem;">Tours</h1>
     <p style="text-align:center; color: #666; margin-bottom: 2rem;">
-        Browse, create, and manage available tours.
+      Browse, create, and manage available tours.
     </p>
-    <button id="show-add-form" class="btn primary">+ Add Tour</button>
+    <div style="text-align:center;">
+      <button id="show-add-form" class="btn primary">+ Add Tour</button>
+    </div>
   </header>
 
   <main>
-    <table id="tour-table" class="tour-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody id="tour-list"></tbody>
-    </table>
+    <div id="tour-cards" class="tour-grid"></div>
   </main>
 
   <!-- Modal -->
@@ -34,6 +27,18 @@
       <form id="add-tour-form">
         <input type="text" id="tour-name" placeholder="Tour Name" required>
         <input type="text" id="tour-description" placeholder="Description" required>
+
+        <select id="tour-type" required>
+          <option value="" disabled selected>Select Location Type</option>
+          <option value="City">City</option>
+          <option value="Beach">Beach</option>
+          <option value="Mountain">Mountain</option>
+          <option value="Forest">Forest</option>
+          <option value="Desert">Desert</option>
+        </select>
+
+        <input type="number" id="tour-price" placeholder="Price" required>
+
         <div class="modal-actions">
           <button type="submit" id="submit-btn" class="btn primary">Save</button>
           <button type="button" id="cancel-btn" class="btn secondary">Cancel</button>
