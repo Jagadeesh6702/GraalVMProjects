@@ -1,68 +1,86 @@
-/* ========== GLOBAL STYLES ========== */
+/* ===============================
+   Global Styles
+=============================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
 body {
-  font-family: "Segoe UI", Arial, sans-serif;
-  margin: 0;
-  background: #f4f9fc;
+  background: linear-gradient(to right, #e3f2fd, #fff);
   color: #333;
+  line-height: 1.6;
 }
 
-h1, h2 {
-  margin: 0;
-  font-weight: 600;
-  color: #2a4d69;
-}
-
-a {
-  text-decoration: none;
-  color: #2a4d69;
-  transition: 0.2s;
-}
-
-a:hover {
-  color: #1e3550;
-}
-
-/* ========== HEADER ========== */
+/* ===============================
+   Header
+=============================== */
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #2a4d69;
-  padding: 16px 24px;
-  color: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  background: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80") 
+              no-repeat center/cover;
+  color: white;
+  padding: 4rem 1rem;
+  text-align: center;
+  position: relative;
+}
+
+.header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+}
+
+.header h1, 
+.header p, 
+.header button {
+  position: relative;
+  z-index: 2;
 }
 
 .header h1 {
-  font-size: 1.8rem;
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
 }
 
-.add-btn, .btn.primary {
-  background: #4cafef;
-  border: none;
-  padding: 10px 16px;
+.header p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  padding: 0.7rem 1.4rem;
   border-radius: 8px;
-  color: #fff;
-  font-size: 0.95rem;
-  font-weight: 500;
+  border: none;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.3s ease;
 }
 
-.add-btn:hover, .btn.primary:hover {
-  background: #3a9bdc;
+.btn.primary {
+  background: #2196f3;
+  color: white;
+}
+
+.btn.primary:hover {
+  background: #1976d2;
 }
 
 .btn.secondary {
-  background: #ddd;
+  background: #e0e0e0;
   color: #333;
 }
 
 .btn.secondary:hover {
-  background: #bbb;
+  background: #c2c2c2;
 }
 
-/* ========== CARD GRID (Overrides TABLE) ========== */
+/* ===============================
+   Tour Cards Grid
+=============================== */
 .tour-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -71,164 +89,160 @@ a:hover {
 }
 
 .tour-card {
-  border: 1px solid #dceaf5;
+  background: white;
   border-radius: 12px;
   overflow: hidden;
-  background: #fff;
-  box-shadow: 0 4px 12px rgba(42, 77, 105, 0.1);
-  transition: transform 0.2s;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
 }
 
 .tour-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
 }
 
 .tour-card img {
   width: 100%;
-  height: 160px;
+  height: 180px;
   object-fit: cover;
 }
 
-.tour-card .content {
-  padding: 16px;
+.tour-card .card-content {
+  padding: 1rem;
 }
 
 .tour-card h3 {
-  margin: 0 0 6px;
-  font-size: 1.2rem;
-  color: #2a4d69;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  color: #1976d2;
 }
 
 .tour-card p {
-  margin: 4px 0;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  margin-bottom: 0.8rem;
   color: #555;
 }
 
-.actions {
-  margin-top: 10px;
+.tour-card .price {
+  font-weight: bold;
+  color: #388e3c;
 }
 
-.action-btn {
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  margin-right: 6px;
-  transition: 0.2s;
-}
-
-.edit-btn {
-  background: #4cafef;
-  color: #fff;
-}
-
-.edit-btn:hover {
-  background: #3a9bdc;
-}
-
-.delete-btn {
-  background: #f55c47;
-  color: #fff;
-}
-
-.delete-btn:hover {
-  background: #d94a37;
-}
-
-/* ========== MODAL ========== */
+/* ===============================
+   Modal Styles
+=============================== */
 .modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.6);
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 999;
+  justify-content: center;
+  z-index: 10;
 }
 
-.hidden {
+.modal.hidden {
   display: none;
 }
 
 .modal-content {
-  background: #fff;
-  padding: 32px;
+  background: white;
   border-radius: 12px;
-  width: 400px;
-  max-width: 90%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  box-shadow: 0 6px 24px rgba(42, 77, 105, 0.15);
-  animation: slideDown 0.3s ease;
+  padding: 2rem;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
 
 .modal-content h2 {
-  margin: 0;
-  font-size: 1.5rem;
-  color: #2a4d69;
-  text-align: center;
-  border-bottom: 1px solid #e0e0e0;
-  padding-bottom: 10px;
+  margin-bottom: 1rem;
+  color: #1976d2;
+  font-size: 1.6rem;
 }
 
-/* Inputs */
 .modal-content input,
-.modal-content select {
-  padding: 12px 14px;
-  border: 1px solid #c9e7fa;
+.modal-content select,
+.modal-content textarea {
+  width: 100%;
+  padding: 0.7rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 1rem;
-  transition: border 0.2s, box-shadow 0.2s;
+  transition: border-color 0.3s ease;
 }
 
 .modal-content input:focus,
-.modal-content select:focus {
-  border-color: #2a4d69;
-  box-shadow: 0 0 0 3px rgba(42, 77, 105, 0.2);
+.modal-content select:focus,
+.modal-content textarea:focus {
   outline: none;
+  border-color: #2196f3;
 }
 
-/* Actions */
 .modal-actions {
   display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  margin-top: 10px;
+  justify-content: space-between;
+  margin-top: 1rem;
 }
 
-.modal-actions button {
-  padding: 10px 16px;
-  border-radius: 8px;
+/* ===============================
+   Image Preview
+=============================== */
+#image-preview-container {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+#location-image {
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* ===============================
+   Footer
+=============================== */
+footer {
+  background: #1976d2;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+/* Action Buttons Container */
+.action-buttons {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+/* Base Button */
+.btn {
   border: none;
-  font-size: 0.95rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: 0.2s;
+  transition: all 0.3s ease;
 }
 
-/* Animation */
-@keyframes slideDown {
-  from {
-    transform: translateY(-15px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+/* Edit Button */
+.btn.edit {
+  background: #ff9800;
+  color: #fff;
+}
+.btn.edit:hover {
+  background: #e68900;
 }
 
-/* ========== RESPONSIVE ========== */
-@media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    gap: 12px;
-    text-align: center;
-  }
-  .tour-grid {
-    grid-template-columns: 1fr;
-    padding: 1rem;
-  }
+/* Delete Button */
+.btn.delete {
+  background: #f44336;
+  color: #fff;
 }
+.btn.delete:hover {
+  background: #d32f2f;
+}
+

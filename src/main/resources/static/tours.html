@@ -17,10 +17,11 @@
   </header>
 
   <main>
+    <!-- Tour cards will be injected here by JS -->
     <div id="tour-cards" class="tour-grid"></div>
   </main>
 
-  <!-- Modal -->
+  <!-- Add/Edit Modal -->
   <div id="form-modal" class="modal hidden">
     <div class="modal-content">
       <h2 id="form-title">Add a New Tour</h2>
@@ -28,22 +29,34 @@
         <input type="text" id="tour-name" placeholder="Tour Name" required>
         <input type="text" id="tour-description" placeholder="Description" required>
 
-        <select id="tour-type" required>
-          <option value="" disabled selected>Select Location Type</option>
-          <option value="City">City</option>
-          <option value="Beach">Beach</option>
-          <option value="Mountain">Mountain</option>
-          <option value="Forest">Forest</option>
-          <option value="Desert">Desert</option>
+        <!-- Dynamic Location Dropdown -->
+        <select id="tour-location" required>
+          <option value="" disabled selected>Loading locations...</option>
         </select>
 
         <input type="number" id="tour-price" placeholder="Price" required>
+
+        <!-- Image preview -->
+        <div id="image-preview-container">
+          <img id="location-image" src="" alt="Location preview" class="hidden">
+        </div>
+
+        <!-- Hidden field to store photo URL -->
+        <input type="hidden" id="photo-url" name="photo-url">
 
         <div class="modal-actions">
           <button type="submit" id="submit-btn" class="btn primary">Save</button>
           <button type="button" id="cancel-btn" class="btn secondary">Cancel</button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- View Modal for non-admin users -->
+  <div id="view-modal" class="modal hidden">
+    <div class="modal-content">
+      <span id="view-close-btn" class="close">&times;</span>
+      <div id="view-content"></div>
     </div>
   </div>
 
