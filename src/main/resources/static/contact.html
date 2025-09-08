@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us - Tour Guide</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f6f9;
+      color: #333;
+    }
+
+    /* ---------- HEADER ---------- */
+    header {
+      position: relative;
+      background: url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1') no-repeat center center/cover;
+      height: 40vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+    }
+    header h1 {
+      font-size: 2.5rem;
+      z-index: 1;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+    }
+
+    /* ---------- NAV ---------- */
+    nav {
+      background: linear-gradient(90deg, #1e3c72, #2a5298);
+      padding: 1rem;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      margin: 0 20px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s, transform 0.2s;
+    }
+    nav a:hover {
+      color: #ffd700;
+      transform: scale(1.05);
+    }
+
+    /* ---------- MAIN ---------- */
+    main {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: #1e3c72;
+    }
+
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .contact-info {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .contact-info h3 {
+      margin-top: 0;
+      color: #1e3c72;
+    }
+    .contact-info p {
+      margin: 0.5rem 0;
+    }
+
+    .contact-form {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .contact-form label {
+      display: block;
+      margin: 0.5rem 0 0.2rem;
+      font-weight: 600;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      font-family: inherit;
+    }
+    .contact-form textarea {
+      height: 120px;
+      resize: none;
+    }
+    .contact-form button {
+      background: #1e3c72;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+    .contact-form button:hover {
+      background: #2a5298;
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      text-align: center;
+      background: #1e3c72;
+      color: white;
+      padding: 1rem;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 768px) {
+      .contact-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>Contact Us</h1>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="tours.html">View Tours</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <!-- Main -->
+  <main>
+    <h2>We’d Love to Hear From You</h2>
+    <div class="contact-container">
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <h3>Our Office</h3>
+        <p><strong>Address:</strong> 123 Travel Street, Wander City</p>
+        <p><strong>Phone:</strong> +91 98765 43210</p>
+        <p><strong>Email:</strong> info@tourguide.com</p>
+        <p><strong>Follow Us:</strong> Facebook | Instagram | Twitter</p>
+      </div>
+
+      <!-- Contact Form -->
+      <form class="contact-form">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" required></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Tour Guide. All Rights Reserved.</p>
+  </footer>
+
+  <!-- (Optional) JS for form handling -->
+  <script>
+    document.querySelector('.contact-form').addEventListener('submit', e => {
+      e.preventDefault();
+      alert("Thank you for contacting us! We'll get back to you soon.");
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>

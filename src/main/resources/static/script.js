@@ -7,10 +7,16 @@ const tourLocation = document.getElementById("tour-location");
 const locationImage = document.getElementById("location-image");
 const photoUrlField = document.getElementById("photo-url");
 
-// View Modal for non-admin users
+// View Modal
 const viewModal = document.getElementById("view-modal");
-const viewContent = document.getElementById("view-content");
 const viewCloseBtn = document.getElementById("view-close-btn");
+
+// View Modal fields
+const viewTitle = document.getElementById("view-title");
+const viewDescription = document.getElementById("view-description");
+const viewLocation = document.getElementById("view-location");
+const viewPrice = document.getElementById("view-price");
+const viewImage = document.getElementById("view-image");
 
 const UNSPLASH_ACCESS_KEY = "lX89VBFwR5hXGoEvy72mVRv-4D2ynW4wcy-dEyFaRXk"; // Replace with your Unsplash key
 let editingId = null; // for edit
@@ -31,12 +37,15 @@ cancelBtn.addEventListener("click", () => {
 // Close view modal
 viewCloseBtn.addEventListener("click", () => {
   viewModal.classList.add("hidden");
-  viewContent.innerHTML = "";
 });
 
 // Load static locations
 function loadLocations() {
-  const locations = ["Paris", "New York", "London", "Tokyo", "Sydney", "Goa", "Dubai", "Rome", "Istanbul", "Bangkok","Munnar","Kerala","Agra","Jaipur","Kolkata"];
+  const locations = [
+    "Paris", "New York", "London", "Tokyo", "Sydney",
+    "Goa", "Dubai", "Rome", "Istanbul", "Bangkok",
+    "Munnar", "Kerala", "Agra", "Jaipur", "Kolkata"
+  ];
   tourLocation.innerHTML = `<option value="" disabled selected>Select Location</option>`;
   locations.forEach(loc => {
     const option = document.createElement("option");
@@ -134,6 +143,13 @@ async function loadTours() {
 
     await fetchCurrentUser();
 
+    // 🔹 Hide Add Tour button if not admin
+    if (!currentUser.isAdmin) {
+      showAddFormBtn.style.display = "none";
+    } else {
+      showAddFormBtn.style.display = "inline-block";
+    }
+
     const res = await fetch("/api/tours");
     if (!res.ok) throw new Error("Failed to fetch tours");
     const tours = await res.json();
@@ -199,16 +215,12 @@ async function loadTours() {
 
         viewBtn.onclick = () => {
           // Show view modal with full details
-          viewContent.innerHTML = `
-            <h3>${tour.location}</h3>
-            <p><strong>Added By:</strong> ${tour.name}</p>
-            <p><strong>Description:</strong> ${tour.description}</p>
-            <p><strong>Price:</strong> ₹${tour.price}</p>
-            <p><strong>Tour Slots:</strong> ${tour.slots || "N/A"}</p>
-            <p><strong>Contact Number:</strong> ${tour.contact_number || "N/A"}</p>
-            <p><strong>Day of Travel:</strong> ${tour.travel_day || "N/A"}</p>
-            <p><strong>Additional Details:</strong> ${tour.additional_details || "N/A"}</p>
-          `;
+          viewTitle.textContent = tour.name;
+          viewDescription.textContent = tour.description;
+          viewLocation.textContent = tour.location;
+          viewPrice.textContent = `₹${tour.price}`;
+          viewImage.src = tour.photo_url || "https://via.placeholder.com/600x250";
+
           viewModal.classList.remove("hidden");
         };
       }
