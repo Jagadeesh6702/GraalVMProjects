@@ -5,7 +5,7 @@
   <title>Tours</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Consistent Header */
+    /* Header */
     header {
       position: relative;
       background: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470') no-repeat center center/cover;
@@ -23,20 +23,13 @@
       top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(0, 0, 0, 0.5);
     }
-    header h1,
-    header p,
-    header .btn {
-      position: relative;
-      z-index: 1;
-    }
+    header h1, header p, header .btn { position: relative; z-index: 1; }
 
     /* Navigation */
     nav {
       background: linear-gradient(90deg, #1e3c72, #2a5298);
       padding: 1rem;
       text-align: center;
-      position: relative;
-      z-index: 2;
     }
     nav a {
       color: white;
@@ -45,61 +38,30 @@
       font-weight: 600;
       transition: color 0.3s, transform 0.2s;
     }
-    nav a:hover {
-      color: #ffd700;
-      transform: scale(1.05);
-    }
+    nav a:hover { color: #ffd700; transform: scale(1.05); }
 
     /* Buttons */
-    .btn {
-      padding: 0.6rem 1.2rem;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .btn.primary {
-      background: #ffd700;
-      color: #1e3c72;
-      transition: background 0.3s;
-    }
-    .btn.primary:hover {
-      background: #e6c200;
-    }
-    .btn.secondary {
-      background: #ccc;
-      color: #333;
-    }
+    .btn { padding: 0.6rem 1.2rem; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; }
+    .btn.primary { background: #ffd700; color: #1e3c72; transition: background 0.3s; }
+    .btn.primary:hover { background: #e6c200; }
+    .btn.secondary { background: #ccc; color: #333; }
 
-    /* Tour grid placeholder */
-    .tour-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      padding: 2rem;
-      max-width: 1100px;
-      margin: auto;
-    }
+    /* Tour grid */
+    .tour-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; padding: 2rem; max-width: 1100px; margin: auto; }
 
     /* Footer */
-    footer {
-      text-align: center;
-      background: #1e3c72;
-      color: white;
-      padding: 1rem;
-      margin-top: 2rem;
-    }
+    footer { text-align: center; background: #1e3c72; color: white; padding: 1rem; margin-top: 2rem; }
   </style>
 </head>
 <body>
-  <!-- Navigation (shared) -->
+  <!-- Navigation -->
   <nav>
     <a href="index.html">Home</a>
     <a href="tours.html">View Tours</a>
     <a href="contact.html">Contact</a>
   </nav>
 
-  <!-- Hero Header -->
+  <!-- Header -->
   <header>
     <h1>Tours</h1>
     <p>Browse and manage your tours with ease.</p>
@@ -107,7 +69,6 @@
   </header>
 
   <main>
-    <!-- Tour cards injected by JS -->
     <div id="tour-cards" class="tour-grid"></div>
   </main>
 
@@ -118,6 +79,8 @@
       <form id="add-tour-form">
         <input type="text" id="tour-name" placeholder="Tour Name" required>
         <input type="text" id="tour-description" placeholder="Description" required>
+        <input type="text" id="tour-bestTimeToVisit" placeholder="Best Time To Visit" required>
+        <input type="text" id="tour-durationOfStay" placeholder="Duration Of Stay" required>
 
         <!-- Dynamic Location Dropdown -->
         <select id="tour-location" required>
@@ -142,25 +105,25 @@
     </div>
   </div>
 
-<!-- View Modal for non-admin users -->
-<div id="view-modal" class="modal hidden">
-  <div class="modal-content">
-    <button id="view-close-btn" class="close-btn">&times;</button>
-    <div class="view-card">
-      <img id="view-image" src="" alt="Tour Image" class="view-image">
-      <div class="view-details">
-        <h2 id="view-title"></h2>
-        <p id="view-description"></p>
-        <div class="view-meta">
-          <p><strong>Location:</strong> <span id="view-location"></span></p>
-          <p><strong>Price:</strong> <span id="view-price"></span></p>
+  <!-- View Modal for non-admin users -->
+  <div id="view-modal" class="modal hidden">
+    <div class="modal-content">
+      <button id="view-close-btn" class="close-btn">&times;</button>
+      <div class="view-card">
+        <img id="view-image" src="" alt="Tour Image" class="view-image">
+        <div class="view-details">
+          <h2 id="view-title"></h2>
+          <p id="view-description"></p>
+          <div class="view-meta">
+            <p><strong>Location:</strong> <span id="view-location"></span></p>
+            <p><strong>Price:</strong> <span id="view-price"></span></p>
+            <p><strong>Best Time To Visit:</strong> <span id="view-timeToVisit"></span></p>
+            <p><strong>Duration Of Stay:</strong> <span id="view-stay"></span></p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-
 
   <footer>
     <p>&copy; 2025 Tour Guide. All Rights Reserved.</p>

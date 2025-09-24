@@ -40,6 +40,9 @@
       padding: 1rem;
       text-align: center;
       z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     header nav a {
       color: white;
@@ -52,6 +55,27 @@
       color: #ffd700;
       transform: scale(1.05);
     }
+
+    /* --- IMPROVED LOGOUT BUTTON STYLING --- */
+    .logout-button {
+      background-color: #ffd700; /* Use a solid color for better visibility */
+      border: none; /* Remove the border */
+      color: #1e3c72; /* Set a dark text color for contrast */
+      padding: 8px 20px; /* Adjust padding for a better size */
+      border-radius: 5px; /* Use a subtle border radius */
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-left: 20px;
+      transition: background-color 0.3s, color 0.3s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Add a subtle shadow */
+    }
+    .logout-button:hover {
+      background-color: #ffc400; /* Darken the background on hover */
+      color: #0d2242; /* Darken the text on hover */
+    }
+
+    /* Original styles remain the same */
     header h1, header p {
       z-index: 2;
       position: relative;
@@ -64,8 +88,6 @@
       font-size: 1.2rem;
       margin-top: 0.5rem;
     }
-
-    /* ---------- MAIN SECTION ---------- */
     main {
       padding: 2rem;
       max-width: 1200px;
@@ -84,8 +106,6 @@
       margin-bottom: 2rem;
       color: #1e3c72;
     }
-
-    /* ---------- TOUR CARDS ---------- */
     .tours {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -120,8 +140,6 @@
       color: #555;
       font-size: 0.95rem;
     }
-
-    /* ---------- FOOTER ---------- */
     footer {
       text-align: center;
       background: #1e3c72;
@@ -133,18 +151,17 @@
   </style>
 </head>
 <body>
-  <!-- Header with nav + image -->
   <header>
     <nav>
       <a href="index.html">Home</a>
       <a href="tours.html">View Tours</a>
       <a href="contact.html">Contact</a>
+      <button class="logout-button" id="logout-btn">Log Out</button>
     </nav>
     <h1>Welcome to Tour Guide</h1>
     <p>Discover popular destinations and exciting adventures</p>
   </header>
 
-  <!-- Main Content -->
   <main>
     <span id="welcome" class="welcome"></span>
     <h2>Popular Tours</h2>
@@ -172,21 +189,36 @@
     </div>
   </main>
 
-  <!-- Footer -->
   <footer>
     <p>&copy; 2025 Tour Guide. All Rights Reserved.</p>
   </footer>
 
-  <!-- Welcome Message Script -->
   <script>
-    fetch('/api/users/current')
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById('welcome').textContent = 'Welcome, ' + data.username + ' 👋';
-      })
-      .catch(() => {
-        document.getElementById('welcome').textContent = 'Welcome, Guest 👋';
+    document.addEventListener('DOMContentLoaded', () => {
+      // Logic for the welcome message
+      const welcomeElement = document.getElementById('welcome');
+      fetch('/api/users/current')
+        .then(res => {
+          if (!res.ok) throw new Error('Not logged in');
+          return res.json();
+        })
+        .then(data => {
+          welcomeElement.textContent = 'Welcome, ' + data.username + ' 👋';
+        })
+        .catch(() => {
+          welcomeElement.textContent = 'Welcome, Guest 👋';
+        });
+
+      // Logic for the logout button
+      const logoutBtn = document.getElementById('logout-btn');
+      logoutBtn.addEventListener('click', () => {
+        // Here you would typically send a request to your backend to log the user out
+        // For demonstration purposes, we'll just show an alert and redirect
+        alert('You have been logged out!');
+        // Redirect to the login page or home page
+        window.location.href = '/login.html'; // Or your desired logout destination
       });
+    });
   </script>
 </body>
 </html>

@@ -23,12 +23,15 @@ public class TourController {
 
     @PostMapping
     public Tour addTour(@RequestBody Tour tour) {
+        System.out.println("Incoming Tour: " + tour);
         return service.addTour(tour);
     }
 
     @PutMapping("/{id}")
     public Tour updateTour(@PathVariable Long id, @RequestBody Tour tour) {
         tour.setId(id);
+        System.out.println("Incoming Tour: " + tour);
+
         return service.updateTour(tour);
     }
 

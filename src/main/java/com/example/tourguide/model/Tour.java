@@ -22,5 +22,9 @@ public class Tour {
     private String locationType;
     @Column(name = "photo_url")
     private String photoUrl;
+    @Column(name = "best_time_to_visit")
+    private String best_time_to_visit;
+    @Column(name = "duration_of_stay")
+    private String duration_of_stay;
 
 }

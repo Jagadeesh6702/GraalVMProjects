@@ -6,7 +6,8 @@ const addTourForm = document.getElementById("add-tour-form");
 const tourLocation = document.getElementById("tour-location");
 const locationImage = document.getElementById("location-image");
 const photoUrlField = document.getElementById("photo-url");
-
+const bestTimeToVisitField = document.getElementById("tour-bestTimeToVisit");
+const durationOfStayField = document.getElementById("tour-durationOfStay");
 // View Modal
 const viewModal = document.getElementById("view-modal");
 const viewCloseBtn = document.getElementById("view-close-btn");
@@ -17,6 +18,8 @@ const viewDescription = document.getElementById("view-description");
 const viewLocation = document.getElementById("view-location");
 const viewPrice = document.getElementById("view-price");
 const viewImage = document.getElementById("view-image");
+const viewTimeToVisit = document.getElementById("view-timeToVisit");
+const viewStay = document.getElementById("view-stay");
 
 const UNSPLASH_ACCESS_KEY = "lX89VBFwR5hXGoEvy72mVRv-4D2ynW4wcy-dEyFaRXk"; // Replace with your Unsplash key
 let editingId = null; // for edit
@@ -41,11 +44,22 @@ viewCloseBtn.addEventListener("click", () => {
 
 // Load static locations
 function loadLocations() {
-  const locations = [
-    "Paris", "New York", "London", "Tokyo", "Sydney",
-    "Goa", "Dubai", "Rome", "Istanbul", "Bangkok",
-    "Munnar", "Kerala", "Agra", "Jaipur", "Kolkata"
-  ];
+const locations = [
+  // South India
+  "Mahabalipuram", "Pondicherry", "Kanchipuram", "Chengalpattu",
+  "Tirupati", "Yelagiri", "Vellore", "Kodaikanal", "Ooty",
+  "Coimbatore", "Madurai", "Rameswaram", "Hampi", "Mysore",
+  "Bangalore", "Kabini", "Coorg", "Chikmagalur", "Gokarna",
+  "Hassan", "Srirangapatna", "Hosur", "Thanjavur", "Chettinad",
+  "Kumarakom", "Alleppey", "Munnar", "Wayanad", "Kochi",
+  "Varkala", "Kannur", "Bekal",
+
+  // North India
+  "Delhi", "Agra", "Jaipur", "Varanasi", "Rishikesh",
+  "Haridwar", "Shimla", "Manali", "Leh", "Amritsar",
+  "Jaisalmer", "Jodhpur", "Udaipur", "Mussoorie", "Nainital"
+];
+
   tourLocation.innerHTML = `<option value="" disabled selected>Select Location</option>`;
   locations.forEach(loc => {
     const option = document.createElement("option");
@@ -92,12 +106,15 @@ addTourForm.addEventListener("submit", async (e) => {
     description: document.getElementById("tour-description").value,
     location: tourLocation.value,
     price: document.getElementById("tour-price").value,
-    photo_url: photoUrlField.value
+    photo_url: photoUrlField.value,
+    best_time_to_visit: bestTimeToVisitField.value,
+    duration_of_stay: durationOfStayField.value
   };
 
   try {
     if (editingId) {
       // Update tour
+      console.log("tour form:", formData);
       await fetch(`/api/tours/${editingId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -143,12 +160,8 @@ async function loadTours() {
 
     await fetchCurrentUser();
 
-    // 🔹 Hide Add Tour button if not admin
-    if (!currentUser.isAdmin) {
-      showAddFormBtn.style.display = "none";
-    } else {
-      showAddFormBtn.style.display = "inline-block";
-    }
+    // Hide Add Tour button if not admin
+    showAddFormBtn.style.display = currentUser.isAdmin ? "inline-block" : "none";
 
     const res = await fetch("/api/tours");
     if (!res.ok) throw new Error("Failed to fetch tours");
@@ -168,13 +181,14 @@ async function loadTours() {
           <p><strong>Added By:</strong> ${tour.name}</p>
           <p><strong>Description:</strong> ${tour.description}</p>
           <p><strong>Price:</strong> ₹${tour.price}</p>
+          <p><strong>Best Time To Visit:</strong> ${tour.best_time_to_visit || "N/A"}</p>
+          <p><strong>Duration Of Stay:</strong> ${tour.duration_of_stay || "N/A"}</p>
         </div>
       `;
 
       const contentDiv = card.querySelector(".content");
 
       if (currentUser.isAdmin) {
-        // Admin: edit/delete buttons
         const actions = document.createElement("div");
         actions.className = "action-buttons";
         actions.innerHTML = `
@@ -188,6 +202,8 @@ async function loadTours() {
           editingId = tour.id;
           document.getElementById("tour-name").value = tour.name;
           document.getElementById("tour-description").value = tour.description;
+          document.getElementById("tour-bestTimeToVisit").value = tour.best_time_to_visit || "";
+          document.getElementById("tour-durationOfStay").value = tour.duration_of_stay || "";
           tourLocation.value = tour.location;
           document.getElementById("tour-price").value = tour.price;
           photoUrlField.value = tour.photo_url || "";
@@ -205,7 +221,6 @@ async function loadTours() {
             loadTours();
           }
         };
-
       } else {
         // Non-admin: add View button
         const viewBtn = document.createElement("button");
@@ -214,13 +229,13 @@ async function loadTours() {
         contentDiv.appendChild(viewBtn);
 
         viewBtn.onclick = () => {
-          // Show view modal with full details
           viewTitle.textContent = tour.name;
           viewDescription.textContent = tour.description;
           viewLocation.textContent = tour.location;
           viewPrice.textContent = `₹${tour.price}`;
+          viewTimeToVisit.textContent = tour.best_time_to_visit || "N/A";
+          viewStay.textContent = tour.duration_of_stay || "N/A";
           viewImage.src = tour.photo_url || "https://via.placeholder.com/600x250";
-
           viewModal.classList.remove("hidden");
         };
       }
