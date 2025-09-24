@@ -181,8 +181,6 @@ async function loadTours() {
           <p><strong>Added By:</strong> ${tour.name}</p>
           <p><strong>Description:</strong> ${tour.description}</p>
           <p><strong>Price:</strong> ₹${tour.price}</p>
-          <p><strong>Best Time To Visit:</strong> ${tour.best_time_to_visit || "N/A"}</p>
-          <p><strong>Duration Of Stay:</strong> ${tour.duration_of_stay || "N/A"}</p>
         </div>
       `;
 
