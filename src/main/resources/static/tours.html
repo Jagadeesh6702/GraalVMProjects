@@ -28,8 +28,15 @@
     /* Navigation */
     nav {
       background: linear-gradient(90deg, #1e3c72, #2a5298);
-      padding: 1rem;
-      text-align: center;
+      padding: 1rem 2rem; /* Add horizontal padding for space */
+      display: flex;
+      justify-content: space-between; /* This aligns items to opposite ends */
+      align-items: center;
+    }
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      flex-grow: 1; /* Pushes the logout button to the right */
     }
     nav a {
       color: white;
@@ -38,7 +45,29 @@
       font-weight: 600;
       transition: color 0.3s, transform 0.2s;
     }
-    nav a:hover { color: #ffd700; transform: scale(1.05); }
+    nav a:hover {
+      color: #ffd700;
+      transform: scale(1.05);
+    }
+
+    /* Logout Button Styling */
+    .logout-button {
+      background-color: #ffd700;
+      border: none;
+      color: #1e3c72;
+      padding: 8px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .logout-button:hover {
+      background-color: #ffc400;
+      color: #0d2242;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
 
     /* Buttons */
     .btn { padding: 0.6rem 1.2rem; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; }
@@ -54,14 +83,15 @@
   </style>
 </head>
 <body>
-  <!-- Navigation -->
   <nav>
-    <a href="index.html">Home</a>
-    <a href="tours.html">View Tours</a>
-    <a href="contact.html">Contact</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="tours.html">View Tours</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <button class="logout-button" id="logout-btn">Log Out</button>
   </nav>
 
-  <!-- Header -->
   <header>
     <h1>Tours</h1>
     <p>Browse and manage your tours with ease.</p>
@@ -72,31 +102,22 @@
     <div id="tour-cards" class="tour-grid"></div>
   </main>
 
-  <!-- Add/Edit Modal -->
   <div id="form-modal" class="modal hidden">
     <div class="modal-content">
       <h2 id="form-title">Add a New Tour</h2>
       <form id="add-tour-form">
         <input type="text" id="tour-name" placeholder="Tour Name" required>
         <input type="text" id="tour-description" placeholder="Description" required>
-        <input type="text" id="tour-bestTimeToVisit" placeholder="Best Time To Visit" required>
-        <input type="text" id="tour-durationOfStay" placeholder="Duration Of Stay" required>
-
-        <!-- Dynamic Location Dropdown -->
         <select id="tour-location" required>
           <option value="" disabled selected>Loading locations...</option>
         </select>
-
         <input type="number" id="tour-price" placeholder="Price" required>
-
-        <!-- Image preview -->
         <div id="image-preview-container">
           <img id="location-image" src="" alt="Location preview" class="hidden">
-        </div>
-
-        <!-- Hidden photo URL -->
+        </div>       
+        <input type="text" id="tour-bestTimeToVisit" placeholder="Best Time To Visit" required>
+        <input type="text" id="tour-durationOfStay" placeholder="Duration Of Stay" required>
         <input type="hidden" id="photo-url" name="photo-url">
-
         <div class="modal-actions">
           <button type="submit" id="submit-btn" class="btn primary">Save</button>
           <button type="button" id="cancel-btn" class="btn secondary">Cancel</button>
@@ -105,7 +126,6 @@
     </div>
   </div>
 
-  <!-- View Modal for non-admin users -->
   <div id="view-modal" class="modal hidden">
     <div class="modal-content">
       <button id="view-close-btn" class="close-btn">&times;</button>
@@ -130,5 +150,19 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    // Logout Button Functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const logoutBtn = document.getElementById('logout-btn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+          // This is a placeholder. In a real application, you'd make an
+          // API call to your server to invalidate the session.
+          alert('You have been logged out!');
+          window.location.href = '/login.html'; // Redirect to a login page
+        });
+      }
+    });
+  </script>
 </body>
 </html>

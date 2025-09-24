@@ -3,26 +3,225 @@
 <head>
   <meta charset="UTF-8">
   <title>User Management</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --primary-color: #1e3c72;
+      --secondary-color: #2a5298;
+      --accent-color: #ffd700;
+      --text-color: #333;
+      --light-bg: #f4f6f9;
+      --shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light-bg);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+    }
+
+    /* --- General Layout & Typography --- */
+    .header {
+      background: var(--primary-color);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      display: flex; /* Use flexbox to align items */
+      justify-content: space-between; /* Space items evenly */
+      align-items: center; /* Vertically align items */
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      flex-grow: 1; /* Make the title take up available space */
+      text-align: center;
+    }
+    main {
+      padding: 2rem 1rem;
+      max-width: 1000px;
+      margin: 2rem auto;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--primary-color);
+    }
+    p {
+      text-align: center;
+      color: #666;
+      margin-bottom: 2rem;
+    }
+
+    /* --- Buttons --- */
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+    .btn-primary {
+      background: var(--accent-color);
+      color: var(--primary-color);
+    }
+    .btn-primary:hover {
+      background: #e6c200;
+      transform: translateY(-2px);
+    }
+    .btn-secondary {
+      background: #ccc;
+      color: var(--text-color);
+    }
+    .btn-secondary:hover {
+      background: #bbb;
+    }
+    .btn-login { /* New style for the back to login button */
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+      font-weight: 600;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .btn-login:hover {
+      background: white;
+      color: var(--primary-color);
+    }
+    .action-btn {
+      padding: 6px 12px;
+      font-size: 0.9rem;
+      margin: 0 5px;
+      border-radius: 4px;
+    }
+    .edit-btn {
+      background: var(--primary-color);
+      color: white;
+    }
+    .edit-btn:hover {
+      background: var(--secondary-color);
+    }
+    .delete-btn {
+      background: #e74c3c;
+      color: white;
+    }
+    .delete-btn:hover {
+      background: #c0392b;
+    }
+
+    /* --- Table Styling --- */
+    .styled-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 0.9em;
+      min-width: 400px;
+      box-shadow: var(--shadow);
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .styled-table thead tr {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      text-align: left;
+      font-weight: bold;
+    }
+    .styled-table th,
+    .styled-table td {
+      padding: 12px 15px;
+    }
+    .styled-table tbody tr {
+      border-bottom: 1px solid #dddddd;
+    }
+    .styled-table tbody tr:nth-of-type(even) {
+      background-color: #f3f3f3;
+    }
+    .styled-table tbody tr:last-of-type {
+      border-bottom: 2px solid var(--primary-color);
+    }
+
+    /* --- Modal & Form --- */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal.hidden {
+      display: none;
+    }
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      width: 90%;
+      max-width: 450px;
+    }
+    .modal-content h2 {
+      margin-top: 0;
+      color: var(--primary-color);
+    }
+    .modal-content form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .modal-content input[type="text"],
+    .modal-content input[type="email"],
+    .modal-content input[type="password"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .admin-check {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* --- Footer --- */
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: var(--primary-color);
+      color: white;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+      margin-top: 2rem;
+    }
+  </style>
 </head>
 <body>
-  <!-- Header -->
   <header class="header">
-    <h1>User Management</h1>
-    <button id="show-add-form" class="btn btn-primary">+ Add User</button>
-  </header>
+    <button id="back-to-login" class="btn btn-login">Back to Login Page</button>
+    <h1 style="color: white; margin-right: 100px;">User Management</h1>
+    <div></div> </header>
 
-  <!-- User Table -->
   <main>
-    <h1 style="text-align:center; margin-bottom: 2rem;">User Management</h1>
-    <p style="text-align:center; color: #666; margin-bottom: 2rem;">
-        View, add, edit, or remove users from the system.
-    </p>
+    <div style="display: flex; justify-content: flex-end; margin-bottom: 1.5rem;">
+      <button id="show-add-form" class="btn btn-primary">+ Add User</button>
+    </div>
     <table id="user-table" class="styled-table">
       <thead>
         <tr>
           <th>Username</th>
           <th>Email</th>
+          <th>Admin</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -30,7 +229,6 @@
     </table>
   </main>
 
-  <!-- Modal -->
   <div id="form-modal" class="modal hidden">
     <div class="modal-content">
       <h2 id="form-title">Add User</h2>
@@ -38,15 +236,18 @@
         <input type="text" id="user-username" placeholder="Username" required>
         <input type="email" id="user-email" placeholder="Email" required>
         <input type="password" id="user-password" placeholder="Password" required>
+        <div class="admin-check">
+          <input type="checkbox" id="user-isadmin">
+          <label for="user-isadmin">Admin User?</label>
+        </div>
         <div class="modal-actions">
-          <button type="submit" id="submit-btn" class="btn btn-primary">Save</button>
           <button type="button" id="cancel-btn" class="btn btn-secondary">Cancel</button>
+          <button type="submit" id="submit-btn" class="btn btn-primary">Save</button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- Footer -->
   <footer>
     <p>&copy; 2025 Tour Guide - User Management</p>
   </footer>
@@ -56,11 +257,13 @@
     const usernameInput = document.getElementById('user-username');
     const emailInput = document.getElementById('user-email');
     const passwordInput = document.getElementById('user-password');
+    const isAdminInput = document.getElementById('user-isadmin');
     const modal = document.getElementById('form-modal');
     const showAddBtn = document.getElementById('show-add-form');
     const cancelBtn = document.getElementById('cancel-btn');
     const formTitle = document.getElementById('form-title');
     const submitBtn = document.getElementById('submit-btn');
+    const backToLoginBtn = document.getElementById('back-to-login');
     let editingId = null;
 
     function openModal(isEdit = false) {
@@ -81,10 +284,12 @@
         .then(users => {
           userList.innerHTML = '';
           users.forEach(user => {
+            const isAdmin = user.admin === true ? 'Yes' : 'No';
             const tr = document.createElement('tr');
             tr.innerHTML = `
               <td>${user.username}</td>
               <td>${user.email}</td>
+              <td>${isAdmin}</td>
               <td>
                 <button class="action-btn edit-btn">Edit</button>
                 <button class="action-btn delete-btn">Delete</button>
@@ -94,6 +299,7 @@
               usernameInput.value = user.username;
               emailInput.value = user.email;
               passwordInput.value = user.password;
+              isAdminInput.checked = user.admin === true; // Set checkbox state
               editingId = user.id;
               openModal(true);
             };
@@ -121,7 +327,8 @@
       const user = {
         username: usernameInput.value,
         email: emailInput.value,
-        password: passwordInput.value
+        password: passwordInput.value,
+        admin: isAdminInput.checked // This will be true or false
       };
       if (editingId) {
         fetch(`/api/users/${editingId}`, {
@@ -159,6 +366,10 @@
     modal.addEventListener('click', function(e) {
       if (e.target === modal) closeModal();
     });
+
+    backToLoginBtn.onclick = () => {
+      window.location.href = '/login.html'; // Adjust this path to your login page
+    };
 
     loadUsers();
   </script>
